@@ -94,18 +94,12 @@ scenarios = [
 current_scenario_index = 0
 current_scenario = scenarios[current_scenario_index]
 
-# ---------------------------
-# UI Elements
-# ---------------------------
 dialogue_box = pygame.Rect(50, HEIGHT - 200, WIDTH - 100, 100)
 choice_boxes = [
     pygame.Rect(150, HEIGHT - 80, 400, 50),
     pygame.Rect(650, HEIGHT - 80, 400, 50)
 ]
 
-# ---------------------------
-# States
-# ---------------------------
 STATE_TITLE = "title"
 STATE_DIALOGUE = "dialogue"
 STATE_CHOICES = "choices"
@@ -115,9 +109,6 @@ state = STATE_TITLE
 choice_text = ""
 response_text = ""
 
-# ---------------------------
-# Draw Functions
-# ---------------------------
 def draw_title():
     screen.blit(backgrounds["title"], (0, 0))
     title_surface = font_title.render("Dating Sim", True, WHITE)
@@ -155,9 +146,6 @@ def draw_scenario():
             txt_rect = txt.get_rect(center=box.center)
             screen.blit(txt, txt_rect)
 
-# ---------------------------
-# Main Loop
-# ---------------------------
 running = True
 while running:
     for event in pygame.event.get():
