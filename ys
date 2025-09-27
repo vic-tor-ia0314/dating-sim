@@ -1,0 +1,10 @@
+user.name=vic_tor_ia0314
+user.email=vcao9784@gmail.com
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/vic-tor-ia0314/dating-sim.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.main.remote=origin
+branch.main.merge=refs/heads/main
