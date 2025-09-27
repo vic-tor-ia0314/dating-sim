@@ -19,6 +19,7 @@ font_button = pygame.font.SysFont("arial", 40)
 font_dialogue = pygame.font.SysFont("arial", 28)
 font_choice = pygame.font.SysFont("arial", 32)
 
+# Load backgrounds
 bg_title = pygame.image.load(r"tree.jpg").convert()
 bg_title = pygame.transform.scale(bg_title, (WIDTH, HEIGHT))
 
@@ -34,10 +35,6 @@ bg_balcony = pygame.transform.scale(bg_balcony, (WIDTH, HEIGHT))
 bg_mall = pygame.image.load(r"mall.jpg").convert()
 bg_mall = pygame.transform.scale(bg_mall, (WIDTH, HEIGHT))
 
-character = pygame.Surface((300, 400), pygame.SRCALPHA)
-pygame.draw.rect(character, (255, 180, 180), character.get_rect())
-
-
 backgrounds = {
     "title": bg_title,
     "home": bg_home,
@@ -46,6 +43,7 @@ backgrounds = {
     "mall": bg_mall
 }
 
+# Create characters
 def make_character(color):
     surf = pygame.Surface((300, 400), pygame.SRCALPHA)
     pygame.draw.rect(surf, color, surf.get_rect())
@@ -56,59 +54,80 @@ char_jinu = make_character((180, 255, 180))
 char_peppa = make_character((180, 180, 255))
 
 # ---------------------------
-# Dialogue Data
+# Dialogue Data (steps per scenario)
 # ---------------------------
 scenarios = [
     {
         "name": "At the Cafe",
         "background": "cafe",
         "character": char_stilton,
-        "dialogue": "Geronimo: *squeak* Hey, it's you! Oh you know this café? Did you know that they get their ceremonial grade matcha imported from Japan itself.",
-        "choices": [
-            ("Err, matcha tastes like grass, so I usually order from their tea selection.", "Geronimo: Well, it's an acquired taste. Not many people get it."),
-            ("I know! I love their matcha, it's so high quality!", "Geronimo: Finally, someone gets it!")
+        "steps": [
+            {"type": "dialogue", "text": "Geronimo: *squeak* Hey, it's you! Did you know this café gets ceremonial grade matcha from Japan?"},
+            {"type": "choice", "options": [
+                ("Err, matcha tastes like grass.", "Geronimo: Well, it's an acquired taste."),
+                ("I know! I love their matcha!", "Geronimo: Finally, someone gets it!")
+            ]},
+            {"type": "dialogue", "text": "Geronimo: So, what do you usually order here?"},
+            {"type": "choice", "options": [
+                ("I usually go for tea.", "Geronimo: Good choice!"),
+                ("I like pastries more.", "Geronimo: Ah, sweet tooth!")
+            ]},
+            {"type": "dialogue", "text": "Geronimo: Great chatting with you!"}
         ]
     },
     {
         "name": "At the Mall",
         "background": "mall",
         "character": char_peppa,
-        "dialogue": "Peppa: hi",
-        "choices": [
-            ("hi", "Peppa: wasssup"),
-            ("bye", "Peppa: aww")
+        "steps": [
+            {"type": "dialogue", "text": "Peppa: hi"},
+            {"type": "choice", "options": [
+                ("hi", "Peppa: wasssup"),
+                ("bye", "Peppa: aww")
+            ]},
+            {"type": "dialogue", "text": "Peppa: Are you shopping today?"}
         ]
     },
     {
         "name": "At the Balcony",
         "background": "balcony",
         "character": char_jinu,
-        "dialogue": "Jinu: wassup bbg",
-        "choices": [
-            ("heyy", "Jinu: heyy bbg"),
-            ("ew", "Jinu: cmon don't be like that")
+        "steps": [
+            {"type": "dialogue", "text": "Jinu: wassup bbg"},
+            {"type": "choice", "options": [
+                ("heyy", "Jinu: heyy bbg"),
+                ("ew", "Jinu: cmon don't be like that")
+            ]},
+            {"type": "dialogue", "text": "Jinu: Let's enjoy the view together!"}
         ]
     }
 ]
 
+# ---------------------------
+# Game State
+# ---------------------------
 current_scenario_index = 0
 current_scenario = scenarios[current_scenario_index]
+current_step_index = 0
+current_step = current_scenario["steps"][current_step_index]
+response_text = ""
 
+STATE_TITLE = "title"
+STATE_DIALOGUE = "dialogue"
+STATE_CHOICES = "choices"
+STATE_RESPONSE = "response"
+state = STATE_TITLE  # start at title screen
+
+# Dialogue and choice boxes
 dialogue_box = pygame.Rect(50, HEIGHT - 200, WIDTH - 100, 100)
 choice_boxes = [
     pygame.Rect(150, HEIGHT - 80, 400, 50),
     pygame.Rect(650, HEIGHT - 80, 400, 50)
 ]
 
-STATE_TITLE = "title"
-STATE_DIALOGUE = "dialogue"
-STATE_CHOICES = "choices"
-STATE_RESPONSE = "response"
-state = STATE_TITLE
-
-choice_text = ""
-response_text = ""
-
+# ---------------------------
+# Drawing Functions
+# ---------------------------
 def draw_title():
     screen.blit(backgrounds["title"], (0, 0))
     title_surface = font_title.render("Dating Sim", True, WHITE)
@@ -129,53 +148,75 @@ def draw_scenario():
     pygame.draw.rect(screen, BLACK, dialogue_box, 3)
 
     if state == STATE_DIALOGUE:
-        text_surface = font_dialogue.render(current_scenario["dialogue"], True, BLACK)
+        text_surface = font_dialogue.render(current_step["text"], True, BLACK)
         screen.blit(text_surface, (dialogue_box.x + 20, dialogue_box.y + 30))
-
     elif state == STATE_RESPONSE:
         text_surface = font_dialogue.render(response_text, True, BLACK)
         screen.blit(text_surface, (dialogue_box.x + 20, dialogue_box.y + 30))
-
-    # choices
-    if state == STATE_CHOICES:
+    elif state == STATE_CHOICES:
         for i, box in enumerate(choice_boxes):
             pygame.draw.rect(screen, LIGHTBLUE, box)
             pygame.draw.rect(screen, BLACK, box, 2)
-            choice_text = current_scenario["choices"][i][0]
+            choice_text = current_step["options"][i][0]
             txt = font_choice.render(choice_text, True, BLACK)
             txt_rect = txt.get_rect(center=box.center)
             screen.blit(txt, txt_rect)
 
+# ---------------------------
+# Main Loop
+# ---------------------------
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
+        # TITLE SCREEN
         if state == STATE_TITLE:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                state = STATE_DIALOGUE
+                state = STATE_DIALOGUE  # move to first scenario
 
+        # DIALOGUE
         elif state == STATE_DIALOGUE:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                state = STATE_CHOICES
+                current_step_index += 1
+                if current_step_index < len(current_scenario["steps"]):
+                    current_step = current_scenario["steps"][current_step_index]
+                    state = STATE_CHOICES if current_step["type"] == "choice" else STATE_DIALOGUE
+                else:
+                    current_scenario_index += 1
+                    if current_scenario_index < len(scenarios):
+                        current_scenario = scenarios[current_scenario_index]
+                        current_step_index = 0
+                        current_step = current_scenario["steps"][current_step_index]
+                        state = STATE_DIALOGUE if current_step["type"] == "dialogue" else STATE_CHOICES
+                    else:
+                        running = False
 
+        # CHOICES
         elif state == STATE_CHOICES:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for i, box in enumerate(choice_boxes):
                     if box.collidepoint(event.pos):
-                        # pick this choice
-                        response_text = current_scenario["choices"][i][1]
+                        response_text = current_step["options"][i][1]
                         state = STATE_RESPONSE
 
+        # RESPONSE
         elif state == STATE_RESPONSE:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                current_scenario_index += 1
-                if current_scenario_index < len(scenarios):
-                    current_scenario = scenarios[current_scenario_index]
-                    state = STATE_DIALOGUE
+                current_step_index += 1
+                if current_step_index < len(current_scenario["steps"]):
+                    current_step = current_scenario["steps"][current_step_index]
+                    state = STATE_CHOICES if current_step["type"] == "choice" else STATE_DIALOGUE
                 else:
-                    running = False
+                    current_scenario_index += 1
+                    if current_scenario_index < len(scenarios):
+                        current_scenario = scenarios[current_scenario_index]
+                        current_step_index = 0
+                        current_step = current_scenario["steps"][current_step_index]
+                        state = STATE_DIALOGUE if current_step["type"] == "dialogue" else STATE_CHOICES
+                    else:
+                        running = False
 
     # Draw based on state
     if state == STATE_TITLE:
