@@ -22,16 +22,16 @@ font_dialogue_italic = pygame.font.SysFont("timesnewroman", 28, italic=True)
 bg_title = pygame.image.load(r"tree.jpg").convert()
 bg_title = pygame.transform.scale(bg_title, (WIDTH, HEIGHT))
 
-bg_home = pygame.image.load(r"home.jpeg").convert()
+bg_home = pygame.image.load(r"home.jpg").convert()
 bg_home = pygame.transform.scale(bg_home, (WIDTH, HEIGHT))
 
-bg_cafe = pygame.image.load(r"cafe.jpeg").convert()
+bg_cafe = pygame.image.load(r"cafe.jpg").convert()
 bg_cafe = pygame.transform.scale(bg_cafe, (WIDTH, HEIGHT))
 
-bg_balcony = pygame.image.load(r"balcony.jpeg").convert()
+bg_balcony = pygame.image.load(r"balcony.jpg").convert()
 bg_balcony = pygame.transform.scale(bg_balcony, (WIDTH, HEIGHT))
 
-bg_mall = pygame.image.load(r"mall.jpeg").convert()
+bg_mall = pygame.image.load(r"mall.jpg").convert()
 bg_mall = pygame.transform.scale(bg_mall, (WIDTH, HEIGHT))
 
 bg_void = pygame.image.load(r"void.jpg").convert()
