@@ -15,9 +15,9 @@ BLUE = (100, 150, 255)
 LIGHTBLUE = (150, 200, 255)
 
 font_title = pygame.font.SysFont("arial", 72)
-font_button = pygame.font.SysFont("arial", 40)
 font_dialogue = pygame.font.SysFont("arial", 28)
-font_choice = pygame.font.SysFont("arial", 32)
+font_choice = pygame.font.SysFont("arial", 20)
+font_dialogue_italic = pygame.font.SysFont("arial", 28, italic=True)
 
 # Load backgrounds
 bg_title = pygame.image.load(r"tree.jpg").convert()
@@ -35,12 +35,16 @@ bg_balcony = pygame.transform.scale(bg_balcony, (WIDTH, HEIGHT))
 bg_mall = pygame.image.load(r"mall.jpg").convert()
 bg_mall = pygame.transform.scale(bg_mall, (WIDTH, HEIGHT))
 
+bg_office = pygame.image.load(r"office.jpg").convert()
+bg_office = pygame.transform.scale(bg_office, (WIDTH, HEIGHT))
+
 backgrounds = {
     "title": bg_title,
     "home": bg_home,
     "cafe": bg_cafe,
     "balcony": bg_balcony,
-    "mall": bg_mall
+    "mall": bg_mall,
+    "office": bg_office
 }
 
 # Create characters
@@ -62,17 +66,35 @@ scenarios = [
         "background": "cafe",
         "character": char_stilton,
         "steps": [
-            {"type": "dialogue", "text": "Geronimo: *squeak* Hey, it's you! Did you know this café gets ceremonial grade matcha from Japan?"},
+            {"type": "dialogue", "text": "Geronimo: *squeak* Hey, it's you! Oh you know this café? Did you know this café gets ceremonial grade matcha from Japan?"},
             {"type": "choice", "options": [
                 ("Err, matcha tastes like grass.", "Geronimo: Well, it's an acquired taste."),
                 ("I know! I love their matcha!", "Geronimo: Finally, someone gets it!")
             ]},
-            {"type": "dialogue", "text": "Geronimo: So, what do you usually order here?"},
+            {"type": "dialogue", "text": "Geronimo: Anyways, what are you up to, new member? "},
+            {"type": "dialogue", "text": "- Well, I’m on a break from work. It was getting a bit hectic back in the office."},
+            {"type": "dialogue", "text": "Geronimo: Hey, same! My lunch break's a little short, but why complain when you're in charge, right?"},
+            {"type": "dialogue", "text": "- Wow, are you a manager or something?"},
+            {"type": "dialogue", "text": "Geronimo: Actually, I’m the publisher for the Rodent’s Gazette. No pictures paparazzi, I know it’s important stuff."},
             {"type": "choice", "options": [
-                ("I usually go for tea.", "Geronimo: Good choice!"),
-                ("I like pastries more.", "Geronimo: Ah, sweet tooth!")
+                ("Oh my gosh, you must be so rich and talented!", "Geronimo: Haha, you know, we recently had to model an online version of our articles."),
+                ("Oh...", "Geronimo: Haha, you know, we recently had to model an online version of our articles.")
             ]},
-            {"type": "dialogue", "text": "Geronimo: Great chatting with you!"}
+            {"type": "dialogue", "text": "Geronimo: Sure, it’s efficient, but what about the paper? The crinkle of the pages, the stories people can physically hold… that doesn’t exist on a technological device."},
+            {"type": "choice", "options": [
+                ("Yeah! wait, why are you listening to music then?", "Geronimo: Well, that's different."),
+                ("Right...but what's with the earbuds?", "Geronimo: Well, that's different.")
+            ]},
+            {"type": "dialogue", "text": "Geronimo: Music itself is an art that must be appreciated, no matter its form."},
+            {"type": "choice", "options": [
+                ("You're so right, I love music!", "You get me! Right now, I especially love Laufey."),
+                ("I guess so... what do you listen to?", "Geronimo: What am I listening to? Oh you know, some Laufey.")
+            ]},
+            {"type": "dialogue", "text": "Geronimo: Her latest album is ethereal, like- I can barely describe it with words… it's just so enlightening! *squeak* It really evokes the reoccurring themes of women’s struggles and men’s weaponized incompetency within relationships."},
+            {"type": "choice", "options": [
+                ("I lover her music! It always has so much symbolism.", " "),
+                ("It's not that deep… but her music’s great.", "Of course it is that deep! Can’t you see the hidden symbolism within her lyrics, the way they embellish the instrumentational choice?! It’s like magic.")
+            ]}
         ]
     },
     {
@@ -80,12 +102,30 @@ scenarios = [
         "background": "mall",
         "character": char_peppa,
         "steps": [
-            {"type": "dialogue", "text": "Peppa: hi"},
+            {"type": "dialogue", "text": "You had just finished your lunch break and headed back to the office building. You had bigger things to think about; today was the big day where you present next year’s plan and objectives to your boss.", "italic": True},
+            {"type": "dialogue", "text": "Just as the meeting started, your boss got a phone call. As they headed into another room, you coul hear the caller’s frantic complaints.", "italic": True},
+            {"type": "dialogue", "text": "Peppa: I have to get it! Daddy, you just don’t understand, it’s so important!"},
+            {"type": "dialogue", "text": "The project proposition was called off due to the caller’s, quote, “tamper tantrum”. You don’t know whether you feel relieved or annoyed as your boss excused you.", "italic": True},
+            {"type": "dialogue", "text": "You decided to visit the mall. Your pay check recently came into the mail and you want to cheer yourself up by buying some new clothes. After walking into the nearest chic boutique you can find, you browse. You check the price tag of a stylish pair of pants and gasp. You realize you are not part of the tax bracket that can shop here.", "italic": True},
+            {"type": "dialogue", "text": "Before you can leave the boutique, you hear an impatient scoff to your right.", "italic": True},
+            {"type": "dialogue", "text": "Peppa: I’m sorry, this is not the correct colour I requested! Don’t you see how it clashes with my jewellery combo and shoes? This is unnaceptable!"},
+            {"type": "dialogue", "text": "A few employees around you immediately jump to action, scurrying about and frantically piling clothes in their arms. You turn around and face the person screaming.", "italic": True},
+            {"type": "dialogue", "text": "Peppa: *oink* Oh my gosh, I love your necklace! You must tell me where you got it, I literally have a pair of earrings with the same style!"},
+            {"type": "dialogue", "text": "- Thank you so much! Actually, I got this from my mother."},
+            {"type": "dialogue", "text": "Peppa: Awh, that is so sweet. What a shame though, it really is one of a kind."},
+            {"type": "dialogue", "text": "Peppa: Anyways, I’m trying to get a new outfit for my daddy’s company ceremony tomorrow, but these workers are so slow! Ugh, they should know I could get them fired."},
             {"type": "choice", "options": [
-                ("hi", "Peppa: wasssup"),
-                ("bye", "Peppa: aww")
+                ("That’s kind of rude. They’re just doing their job.", "Peppa: Well, I’m just saying! If they really care about their business, they should prioritize their well-paying customers! *ahem* The sequin top goes here!"),
+                ("Companies will hire anyone these days.", "Peppa: Exactly! Hey, they finally got some of my stuff right! Sequin top over here!")
             ]},
-            {"type": "dialogue", "text": "Peppa: Are you shopping today?"}
+            {"type": "dialogue", "text": "Peppa: Wow, this is perfect! I’m definitely getting this!"},
+            {"type": "dialogue", "text": "Peppa struts over to the cashier and motions at them to scan it. After a moment, the register display shows the price of the top: $100,000. Peppa takes out a silver card and swipes. Nothing happens. She swipes it again, and again, but nothing happens.", "italic": True},
+            {"type": "dialogue", "text": "Peppa: Uhm, now that is just hilarious! ___ we might have a problem…. My card’s at its spending limit, ugh! Can you please cover me?!"},
+            {"type": "choice", "options": [
+                ("Uh, I literally don’t know you…. also, that’s way too expensive.", "Peppa: I thought we were on the same page! Ugh, way to make someone feel welcomed. Whatever, I always have my daddy’s card with me for cases like this. A girl’s gotta stay prepared! *oink oink*"),
+                ("I'd love to, bit mine's also maxxed out. Maybe another time or-", "Peppa: Oh, don’t you worry! I was joking, silly. For cases like these, I always have my daddy’s card with me. A girl’s gotta stay prepared!")
+            ]},
+            {"type": "dialogue", "text": "You stare in astonishment as she takes out a gold coloured card and swipes. Sure enough, the transaction completes and the employee rushes to bag the garment.", "italic": True}
         ]
     },
     {
@@ -119,11 +159,31 @@ STATE_RESPONSE = "response"
 state = STATE_TITLE  # start at title screen
 
 # Dialogue and choice boxes
-dialogue_box = pygame.Rect(50, HEIGHT - 200, WIDTH - 100, 100)
+dialogue_box = pygame.Rect(50, HEIGHT - 200, WIDTH - 100, 150)
 choice_boxes = [
     pygame.Rect(150, HEIGHT - 80, 400, 50),
     pygame.Rect(650, HEIGHT - 80, 400, 50)
 ]
+
+def draw_text_wrapped(text, font, color, rect, surface, line_spacing=5, padding=10):
+    words = text.split(' ')
+    lines = []
+    current_line = ""
+
+    for word in words:
+        test_line = current_line + word + " "
+        if font.size(test_line)[0] > rect.width - 2*padding:
+            lines.append(current_line)
+            current_line = word + " "
+        else:
+            current_line = test_line
+    lines.append(current_line)
+
+    y_offset = padding
+    for line in lines:
+        text_surface = font.render(line.strip(), True, color)
+        surface.blit(text_surface, (rect.x + padding, rect.y + y_offset))
+        y_offset += font.get_height() + line_spacing
 
 # ---------------------------
 # Drawing Functions
@@ -148,19 +208,15 @@ def draw_scenario():
     pygame.draw.rect(screen, BLACK, dialogue_box, 3)
 
     if state == STATE_DIALOGUE:
-        text_surface = font_dialogue.render(current_step["text"], True, BLACK)
-        screen.blit(text_surface, (dialogue_box.x + 20, dialogue_box.y + 30))
+        font_to_use = font_dialogue_italic if current_step.get("italic") else font_dialogue
+        draw_text_wrapped(current_step["text"], font_dialogue, BLACK, dialogue_box, screen)
     elif state == STATE_RESPONSE:
-        text_surface = font_dialogue.render(response_text, True, BLACK)
-        screen.blit(text_surface, (dialogue_box.x + 20, dialogue_box.y + 30))
+        draw_text_wrapped(response_text, font_dialogue, BLACK, dialogue_box, screen)
     elif state == STATE_CHOICES:
         for i, box in enumerate(choice_boxes):
             pygame.draw.rect(screen, LIGHTBLUE, box)
             pygame.draw.rect(screen, BLACK, box, 2)
-            choice_text = current_step["options"][i][0]
-            txt = font_choice.render(choice_text, True, BLACK)
-            txt_rect = txt.get_rect(center=box.center)
-            screen.blit(txt, txt_rect)
+            draw_text_wrapped(current_step["options"][i][0], font_choice, BLACK, box, screen)
 
 # ---------------------------
 # Main Loop
