@@ -9,17 +9,16 @@ pygame.display.set_caption("Dating Sim")
 
 clock = pygame.time.Clock()
 
-WHITE = (255, 255, 255)
+WHITE = (250, 157, 150) #acc light pink, too lazy to change lmao
 BLACK = (0, 0, 0)
-BLUE = (100, 150, 255)
-LIGHTBLUE = (150, 200, 255)
+LIGHTBLUE = (255, 89, 133) #acc dark pink, too lazy to change as well
 
-font_title = pygame.font.SysFont("arial", 72)
-font_dialogue = pygame.font.SysFont("arial", 28)
-font_choice = pygame.font.SysFont("arial", 20)
-font_dialogue_italic = pygame.font.SysFont("arial", 28, italic=True)
+font_title = pygame.font.SysFont("timesnewroman", 72)
+font_dialogue = pygame.font.SysFont("timesnewroman", 28)
+font_choice = pygame.font.SysFont("timesnewroman", 20)
+font_dialogue_italic = pygame.font.SysFont("timesnewroman", 28, italic=True)
 
-# Load backgrounds
+
 bg_title = pygame.image.load(r"tree.jpg").convert()
 bg_title = pygame.transform.scale(bg_title, (WIDTH, HEIGHT))
 
@@ -47,41 +46,38 @@ backgrounds = {
     "void": bg_void
 }
 
-# Create characters
-def make_character(color):
-    surf = pygame.Surface((300, 400), pygame.SRCALPHA)
-    pygame.draw.rect(surf, color, surf.get_rect())
-    return surf
 
-char_stilton = make_character((255, 180, 180))
+char_stilton = pygame.image.load("stilton.png").convert_alpha()
+char_stilton = pygame.transform.scale(char_stilton, (600, 600))
+
 char_jinu = pygame.image.load("jinu.png").convert_alpha()
 char_jinu = pygame.transform.scale(char_jinu, (450, 600))
+
 char_peppa = pygame.image.load("peppa.png").convert_alpha()
 char_peppa = pygame.transform.scale(char_peppa, (450, 600))
+
 char_leader = pygame.image.load("leader.webp").convert_alpha()
 char_leader = pygame.transform.scale(char_leader, (500, 500))
 
-# ---------------------------
-# Dialogue Data (steps per scenario)
-# ---------------------------
+
 scenarios = [
     {
         "name": "Initiation",
         "background": "home",
         "character": char_leader,
         "steps": [
-            {"type": "dialogue", "text": "Leaders: We are gathered here today to celebrate the recruitment of another member under the watchful gaze of the Almighty One."},
-            {"type": "dialogue", "text": "Leaders: Although this marks the start of your journey, there remains a final challenge for your path. In order to achieve full ascension, you must perform two sacrificial rituals to Their Greatness."},
+            {"type": "dialogue", "text": "Leader: We are gathered here today to celebrate the recruitment of another member under the watchful gaze of the Almighty One."},
+            {"type": "dialogue", "text": "Leader: Although this marks the start of your journey, there remains a final challenge for your path. In order to achieve full ascension, you must perform two sacrificial rituals to Their Greatness."},
             {"type": "choice", "options": [
-                ("What does that even mean?", "Leaders: As per tradition, the arrival of new members must be balanced by the removal of current members."),
-                ("Let’s freaking go.", "Leaders: As per tradition, the arrival of new members must be balanced by the removal of current members.")
+                ("What does that even mean?", "Leader: As per tradition, the arrival of new members must be balanced by the removal of current members."),
+                ("Let’s freaking go.", "Leader: As per tradition, the arrival of new members must be balanced by the removal of current members.")
             ]},
-            {"type": "dialogue", "text": "Leaders: This should be relatively easy, as we have prepared a list of…. troublesome participants."},
+            {"type": "dialogue", "text": "Leader: This should be relatively easy, as we have prepared a list of…. troublesome participants."},
             {"type": "choice", "options": [
-                ("Wow, that is messed up...", "Leaders: You have twenty four hours until you must perform the sacrifices."),
-                ("Is this a dating sim?", "Leaders: You have twenty four hours until you must perform the sacrifices.")
+                ("Wow, that is messed up...", "Leader: You have twenty four hours until you must perform the sacrifices."),
+                ("Is this a dating sim?", "Leader: You have twenty four hours until you must perform the sacrifices.")
             ]},
-            {"type": "dialogue", "text": "Leaders: Choose wisely."}
+            {"type": "dialogue", "text": "Leader: Choose wisely."}
         ]
     },
     {
@@ -136,13 +132,13 @@ scenarios = [
             {"type": "dialogue", "text": "You had just finished your lunch break and headed back to the office building. You had bigger things to think about; today was the big day where you present next year’s plan and objectives to your boss.", "italic": True},
             {"type": "dialogue", "text": "Just as the meeting started, your boss got a phone call. As they headed into another room, you coul hear the caller’s frantic complaints.", "italic": True},
             {"type": "dialogue", "text": "Peppa: I have to get it! Daddy, you just don’t understand, it’s so important!"},
-            {"type": "dialogue", "text": "The project proposition was called off due to the caller’s, quote, “tamper tantrum”. You don’t know whether you feel relieved or annoyed as your boss excused you.", "italic": True},
+            {"type": "dialogue", "text": "The project proposition was called off due to the caller’s, quote, “temper tantrum”. You don’t know whether you feel relieved or annoyed as your boss excused you.", "italic": True},
             {"type": "dialogue", "text": "You decided to visit the mall. Your pay check recently came into the mail and you want to cheer yourself up by buying some new clothes. After walking into the nearest chic boutique you can find, you browse. You check the price tag of a stylish pair of pants and gasp. You realize you are not part of the tax bracket that can shop here.", "italic": True},
             {"type": "dialogue", "text": "Before you can leave the boutique, you hear an impatient scoff to your right.", "italic": True},
-            {"type": "dialogue", "text": "Peppa: I’m sorry, this is not the correct colour I requested! Don’t you see how it clashes with my jewellery combo and shoes? This is unnaceptable!"},
+            {"type": "dialogue", "text": "Peppa: I’m sorry, this is not the correct colour I requested! Don’t you see how it clashes with my jewellery combo and shoes? This is unnacceptable!"},
             {"type": "dialogue", "text": "A few employees around you immediately jump to action, scurrying about and frantically piling clothes in their arms. You turn around and face the person screaming.", "italic": True},
             {"type": "dialogue", "text": "Peppa: *oink* Oh my gosh, I love your necklace! You must tell me where you got it, I literally have a pair of earrings with the same style!"},
-            {"type": "dialogue", "text": "- Thank you so much! Actually, I got this from my mother."},
+            {"type": "dialogue", "text": "- Thank you so much! Actually, I got this from my mother. She's dead..."},
             {"type": "dialogue", "text": "Peppa: Awh, that is so sweet. What a shame though, it really is one of a kind."},
             {"type": "dialogue", "text": "Peppa: Anyways, I’m trying to get a new outfit for my daddy’s company ceremony tomorrow, but these workers are so slow! Ugh, they should know I could get them fired."},
             {"type": "choice", "options": [
@@ -151,7 +147,7 @@ scenarios = [
             ]},
             {"type": "dialogue", "text": "Peppa: Wow, this is perfect! I’m definitely getting this!"},
             {"type": "dialogue", "text": "Peppa struts over to the cashier and motions at them to scan it. After a moment, the register display shows the price of the top: $100,000. Peppa takes out a silver card and swipes. Nothing happens. She swipes it again, and again, but nothing happens.", "italic": True},
-            {"type": "dialogue", "text": "Peppa: Uhm, now that is just hilarious! ___ we might have a problem…. My card’s at its spending limit, ugh! Can you please cover me?!"},
+            {"type": "dialogue", "text": "Peppa: Uhm, now that is just hilarious! Y/N, we might have a problem…. My card’s at its spending limit, ugh! Can you please cover me?!"},
             {"type": "choice", "options": [
                 ("Uh, I literally don’t know you…. also, that’s way too expensive.", "Peppa: I thought we were on the same page! Ugh, way to make someone feel welcomed. Whatever, I always have my daddy’s card with me for cases like this. A girl’s gotta stay prepared! *oink oink*"),
                 ("I'd love to, bit mine's also maxxed out. Maybe another time or-", "Peppa: Oh, don’t you worry! I was joking, silly. For cases like these, I always have my daddy’s card with me. A girl’s gotta stay prepared!")
@@ -180,13 +176,13 @@ scenarios = [
                 ("Yeah, a perfect place to get away from all the hustle and bustle.", "Jinu: Reminds me of my hometown… Enough about that- oh my gosh are you wearing teddy bear pajamas?"),
                 ("Yup. Great observational skills.", "Jinu: *chuckles* Great comeback, especially from someone who’s in their pajamas. Are those choo-choo trains and teddy bear patterns?")
             ]},
-            {"type": "dialogue", "text": "Your face flushes in embarassment as you realize you are in fact standing on the patio with a stranger in your pajamas."},
+            {"type": "dialogue", "text": "Your face flushes in embarassment as you realize you are in fact standing on the patio in your pajamas with a stranger."},
             {"type": "dialogue", "text": "Jinu: It’s alright, don’t worry. I won’t tell anyone about your…. interesting outfit style. After all, everyone has their preferences."},
             {"type": "choice", "options": [
                 ("Hey, I live here so I can wear what I want!", "Jinu: Of course, whatever you say. Freewill exists for a reason!"),
                 ("Let’s not talk about my attire...", "Jinu: I swear on my soul- cross my heart, I, Jinu Saja, will never speak of this encounter as long as the Earth revolves around the Sun.")
             ]},
-            {"type": "dialogue", "text": "Jinu: So, ___, the mysterious new member that definitely does not wear pajamas, what do you do?"},
+            {"type": "dialogue", "text": "Jinu: So, Y/N, the mysterious new member that definitely does not wear pajamas, what do you do?"},
             {"type": "choice", "options": [
                 ("I work as a developer for Taking Big Numbers Co.", "Jinu: Wow, that’s a pretty big score in the workforce. Good for you! I’m actually a…. let’s call it a performer."),
                 ("Why do you want to know?", "Jinu: Hey, if you’re not comfortable, I’ll tell you mine first. I’m a…. I work in the music industry!")
@@ -203,8 +199,8 @@ scenarios = [
             ]},
             {"type": "dialogue", "text": "Jinu: Hey, how have you been settling into the... group? Must be stressful with the whole orientation thing."},
             {"type": "choice", "options": [
-                ("I’ve never had to do anything like this before.", "Jinu: Yeah, the Leaders are pretty adamant with that whole setup."),
-                ("Sacrificing people is insane, but it’s a cult so...", "Jinu: Yeah, the Leaders are pretty adamant with that whole setup.")
+                ("I’ve never had to do anything like this before.", "Jinu: Yeah, the Leader is pretty adamant with that whole setup."),
+                ("Sacrificing people is insane, but it’s a cult so...", "Jinu: Yeah, the Leader is pretty adamant with that whole setup.")
             ]},
             {"type": "dialogue", "text": "Jinu: You should be fine, though, it’s pretty simple."},
             {"type": "choice", "options": [
@@ -236,7 +232,7 @@ scenarios = [
             ]},
             {"type": "dialogue", "text": "Jinu: Is... meeting you my fate?"},
             {"type": "dialogue", "text": "Just as he takes another step towards you, the phone in your pocket starts buzzing frantically. You leave Jinu on the patio and head back to your room, thoughts spiralling. Who will you choose? How could you choose between people you’ve just gotten to know?"},
-            {"type": "dialogue", "text": "You close your bedroom door and press the recent missed calls button. You wince as the familiar, ominous drawl of the Leaders’ voices answer almost immediately. They tell you your time is up and you must make a decision."},
+            {"type": "dialogue", "text": "You close your bedroom door and press the recent missed calls button. You wince as the familiar, ominous drawl of the Leader’s voice answer almost immediately. They tell you your time is up and you must make a decision."},
         ]
     },
     {
@@ -244,12 +240,12 @@ scenarios = [
         "background": "void",
         "character": char_stilton,
         "steps": [
-            {"type": "dialogue", "text": "All of a sudden, you find yourself in the cult’s chapel. A black, swirling void yawns in front of you, expanding over the most of the room. You realize that Geronimo, Peppa, and Jinu are being held by the Leaders in front of you, gazing at the void with terror as realization dawns upon them."},
-            {"type": "dialogue", "text": "Leaders: You must choose one and sacrifice the other two."},
-            {"type": "dialogue", "text": "Leaders: Choose wisely, now."},
+            {"type": "dialogue", "text": "All of a sudden, you find yourself in the cult’s chapel. A black, swirling void yawns in front of you, expanding over the most of the room. You realize that Geronimo, Peppa, and Jinu are being held by the Leader in front of you, gazing at the void with terror as realization dawns upon them."},
+            {"type": "dialogue", "text": "Leader: You must choose one and sacrifice the other two."},
+            {"type": "dialogue", "text": "Leader: Choose wisely, now."},
             {"type": "choice", "options": [
                 ("Save Geronimo Stilton", "Geronimo: Wow…. well, thanks for picking me. You must’ve been enlightened by my words. Would you like to check out the thrift store that recently opened near my street tomorrow? I’ll pick you up at 11:00."),
-                ("Sacrifice Geronimo Stilton", "Geronimo: But why? I followed all your orders! I did it page by page, line by line with every detail accounted for! ____, how could you?! What about that feminist literature we were gonna read together? Release me-wait-NOOOOOOO!")
+                ("Sacrifice Geronimo Stilton", "Geronimo: But why? I followed all your orders! I did it page by page, line by line with every detail accounted for! Y/N, how could you?! What about that feminist literature we were gonna read together? Release me-wait-NOOOOOOO!")
             ]}
         ]
     },
@@ -260,7 +256,7 @@ scenarios = [
         "steps": [
             {"type": "choice", "options": [
                 ("Save Peppa Pig", "Peppa: I knew you liked me! My charms will work on anyone, heh! We should definitely check out my daddy’s yacht collection tomorrow!"),
-                ("Sacrifice Peppa Pig", "Peppa: No! What is the meaning of this?! Let go of me! Not the purse- not the purse! Please, c'mon, I can buy anything for you! Wait! GET YOUR HANDS OFF ME! ____, I WON'T FORGIVE YOU FOR THIS!")
+                ("Sacrifice Peppa Pig", "Peppa: No! What is the meaning of this?! Let go of me! Not the purse- not the purse! Please, c'mon, I can buy anything for you! Wait! GET YOUR HANDS OFF ME! Y/N, I WON'T FORGIVE YOU FOR THIS!")
             ]}
         ]
     },
@@ -271,7 +267,7 @@ scenarios = [
         "steps": [
             {"type": "choice", "options": [
                 ("Save Jinu", "Jinu: Well, this is a surprise…. not really. I knew we had a connection. You know, I had tickets to go to the aquarium further in town, would you like to join me tomorrow?"),
-                ("Sacrifice Jinu", "Jinu: It’s alright, I had a feeling I was one of the candidates. Maybe in another lifetime, in another universe, we could’ve worked. ___, I give my soul to you.")
+                ("Sacrifice Jinu", "Jinu: It’s alright, I had a feeling I was one of the candidates. Maybe in another lifetime, in another universe, we could’ve worked. Y/N, I give my soul to you.")
             ]}
         ]
     },
@@ -280,15 +276,13 @@ scenarios = [
         "background": "home",
         "character": char_leader,
         "steps": [
-            {"type": "dialogue", "text": "Filled with a new sense of purpose, you are welcomed into the cult by the Leaders. Your ascension towards the Almighty One begins now."},
+            {"type": "dialogue", "text": "Filled with a new sense of purpose, you are welcomed into the cult by the Leader. Your ascension towards the Almighty One begins now."},
             {"type": "dialogue", "text": "Congratulations! You’ve successfully completed the game. "}
         ]
     }
 ]
 
-# ---------------------------
-# Game State
-# ---------------------------
+#states
 current_scenario_index = 0
 current_scenario = scenarios[current_scenario_index]
 current_step_index = 0
@@ -301,7 +295,7 @@ STATE_CHOICES = "choices"
 STATE_RESPONSE = "response"
 state = STATE_TITLE  # start at title screen
 
-# Dialogue and choice boxes
+#box styles
 dialogue_box = pygame.Rect(50, HEIGHT - 200, WIDTH - 100, 150)
 choice_boxes = [
     pygame.Rect(150, HEIGHT - 80, 400, 70),
@@ -328,12 +322,11 @@ def draw_text_wrapped(text, font, color, rect, surface, line_spacing=5, padding=
         surface.blit(text_surface, (rect.x + padding, rect.y + y_offset))
         y_offset += font.get_height() + line_spacing
 
-# ---------------------------
-# Drawing Functions
-# ---------------------------
+
+#draws
 def draw_title():
     screen.blit(backgrounds["home"], (0, 0))
-    title_surface = font_title.render("Dating Sim", True, WHITE)
+    title_surface = font_title.render(" ", True, WHITE)
     title_rect = title_surface.get_rect(center=(WIDTH//2, HEIGHT//3))
     screen.blit(title_surface, title_rect)
 
@@ -342,11 +335,11 @@ def draw_title():
     screen.blit(subtitle, sub_rect)
 
 def draw_scenario():
-    # background and character
+    #bg&char
     screen.blit(backgrounds[current_scenario["background"]], (0, 0))
     screen.blit(current_scenario["character"], (WIDTH//2 - 150, HEIGHT//2 - 325))
 
-    # dialogue box
+    #dialogue
     pygame.draw.rect(screen, WHITE, dialogue_box)
     pygame.draw.rect(screen, BLACK, dialogue_box, 3)
 
@@ -361,21 +354,20 @@ def draw_scenario():
             pygame.draw.rect(screen, BLACK, box, 2)
             draw_text_wrapped(current_step["options"][i][0], font_choice, BLACK, box, screen)
 
-# ---------------------------
-# Main Loop
-# ---------------------------
+
+#main
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-        # TITLE SCREEN
+        #title
         if state == STATE_TITLE:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                state = STATE_DIALOGUE  # move to first scenario
+                state = STATE_DIALOGUE  #first
 
-        # DIALOGUE
+        #dialogue
         elif state == STATE_DIALOGUE:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 current_step_index += 1
@@ -392,7 +384,7 @@ while running:
                     else:
                         running = False
 
-        # CHOICES
+        #choice
         elif state == STATE_CHOICES:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for i, box in enumerate(choice_boxes):
@@ -400,7 +392,7 @@ while running:
                         response_text = current_step["options"][i][1]
                         state = STATE_RESPONSE
 
-        # RESPONSE
+        #response
         elif state == STATE_RESPONSE:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 current_step_index += 1
@@ -417,7 +409,7 @@ while running:
                     else:
                         running = False
 
-    # Draw based on state
+    #title or scenario
     if state == STATE_TITLE:
         draw_title()
     else:
