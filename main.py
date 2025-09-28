@@ -52,7 +52,7 @@ def make_character(color):
 char_stilton = make_character((255, 180, 180))
 char_jinu = make_character((180, 255, 180))
 char_peppa = pygame.image.load("peppa.png").convert_alpha()
-char_peppa = pygame.transform.scale(char_peppa, (500, 600))
+char_peppa = pygame.transform.scale(char_peppa, (450, 600))
 char_leader = pygame.image.load("leader.jpg").convert_alpha()
 char_leader = pygame.transform.scale(char_leader, (500, 500))
 
@@ -84,7 +84,7 @@ scenarios = [
         "background": "cafe",
         "character": char_stilton,
         "steps": [
-            {"type": "dialogue", "text": "You exit your local cafe after ordering a drink. Someone from behind addresses you in surprise."},
+            {"type": "dialogue", "text": "After contemplating, you decide to take a break by visiting a cafe. You exit your local cafe after ordering a drink. Someone from behind addresses you in surprise."},
             {"type": "dialogue", "text": "Geronimo: *squeak* Hey, it's you, the new member! Oh you know this café? Did you know this café gets ceremonial grade matcha from Japan?"},
             {"type": "choice", "options": [
                 ("Err, matcha tastes like grass.", "Geronimo: Well, it's an acquired taste."),
@@ -111,7 +111,7 @@ scenarios = [
             ]},
             {"type": "dialogue", "text": "Geronimo: Her latest album is ethereal, like- I can barely describe it with words… it's just so enlightening! *squeak* It really evokes the reoccurring themes of women’s struggles and men’s weaponized incompetency within relationships."},
             {"type": "choice", "options": [
-                ("I lover her music! It always has so much symbolism.", " "),
+                ("I lover her music! It always has so much symbolism.", "Sometimes songs get so emotional that I tear up…. Man, music is one of mankind’s greatest achievements. It’s practically magic."),
                 ("It's not that deep… but her music’s great.", "Of course it is that deep! Can’t you see the hidden symbolism within her lyrics, the way they embellish the instrumentational choice?! It’s like magic.")
             ]}
         ]
@@ -152,12 +152,71 @@ scenarios = [
         "background": "balcony",
         "character": char_jinu,
         "steps": [
-            {"type": "dialogue", "text": "Jinu: wassup bbg"},
+            {"type": "dialogue", "text": "Today has been long and exhausting. You hurry home and order a healthy amount of McDonald’s. By the time you finish your meal, the sky has darkened and the moon is already out. You decide to head to the patio on your apartment's top floor for some fresh air."},
+            {"type": "dialogue", "text": "As you step outside, you notice someone is already there. They are standing at the edge of the balcony, staring up at the stars. They turn as they hear you approach."},
+            {"type": "dialogue", "text": "Jinu: The moon’s beautiful tonight, isn’t it?"},
+            {"type": "dialogue", "text": "- Yeah, it is."},
+            {"type": "dialogue", "text": "Jinu: I like this part of town. It’s calm and peaceful."},
             {"type": "choice", "options": [
-                ("heyy", "Jinu: heyy bbg"),
-                ("ew", "Jinu: cmon don't be like that")
+                ("Yeah, a perfect place to get away from all the hustle and bustle.", "Jinu: Reminds me of my hometown… Enough about that- oh my gosh are you wearing teddy bear pajamas?"),
+                ("Yup. Great observational skills.", "Jinu: *chuckles* Great comeback, especially from someone who’s in their pajamas. Are those choo-choo trains and teddy bear patterns?")
             ]},
-            {"type": "dialogue", "text": "Jinu: Let's enjoy the view together!"}
+            {"type": "dialogue", "text": "Your face flushes in embarassment as you realize you are in fact standing on the patio with a stranger in your pajamas."},
+            {"type": "dialogue", "text": "Jinu: It’s alright, don’t worry. I won’t tell anyone about your…. interesting outfit style. After all, everyone has their preferences."},
+            {"type": "choice", "options": [
+                ("Hey, I live here so I can wear what I want!", "Jinu: Of course, whatever you say. Freewill exists for a reason!"),
+                ("Let’s not talk about my attire...", "Jinu: I swear on my soul- cross my heart, I, Jinu Saja, will never speak of this encounter as long as the Earth revolves around the Sun.")
+            ]},
+            {"type": "dialogue", "text": "Jinu: So, ___, the mysterious new member that definitely does not wear pajamas, what do you do?"},
+            {"type": "choice", "options": [
+                ("I work as a developer for Taking Big Numbers Co.", "Jinu: Wow, that’s a pretty big score in the workforce. Good for you! I’m actually a…. let’s call it a performer."),
+                ("Why do you want to know?", "Jinu: Hey, if you’re not comfortable, I’ll tell you mine first. I’m a…. I work in the music industry!")
+            ]},
+            {"type": "dialogue", "text": "Jinu: I’m trying to stay humble, but I’ve gathered quite a following."},
+            {"type": "choice", "options": [
+                ("Oh my gosh! Are you someone famous?", "Jinu: Well... yes."),
+                ("You’re definitely bragging.", "Jinu: Well... fine, I’ll admit it.")
+            ]},
+            {"type": "dialogue", "text": "Jinu: I’m part of a- I wouldn’t call it a boy band but…. *sighs* It’s a little complicated…. you know how bosses are, right?"},
+            {"type": "choice", "options": [
+                ("Hey, is everything alright?", "Jinu: Sorry, I don’t want to just dump all this on someone."),
+                ("Do tell.", "Jinu: Sorry, I don’t want to just dump all this on someone.")
+            ]},
+            {"type": "dialogue", "text": "Jinu: Hey, how have you been settling into the... group? Must be stressful with the whole orientation thing."},
+            {"type": "choice", "options": [
+                ("I’ve never had to do anything like this before.", "Jinu: Yeah, the Leaders are pretty adamant with that whole setup."),
+                ("Sacrificing people is insane, but it’s a cult so...", "Jinu: Yeah, the Leaders are pretty adamant with that whole setup.")
+            ]},
+            {"type": "dialogue", "text": "Jinu: You should be fine, though, it’s pretty simple."},
+            {"type": "choice", "options": [
+                ("Choosing who lives is not simple.", "Jinu: Well, in the end, it depends on whether you want to stay in the cult, right? It does make life more…. fulfilling."),
+                ("You’re one of my options bro.", "Jinu: Sorry, what did you say? I think the wind carried your voice away.")
+            ]},
+            {"type": "dialogue", "text": "Jinu: Anyways, I like to look at the bigger picture. It doesn’t really matter who you choose, as long as you get in. If you’re really stressed about it, though, I can put in some input. I know most of the members."},
+            {"type": "dialogue", "text": "- It’s fine. Thanks for asking about it."},
+            {"type": "dialogue", "text": "Jinu: No problem! Us members have to stick together."},
+            {"type": "choice", "options": [
+                ("Yeah, I’m glad I have you.", "Jinu: Hey... I know this is sudden but, I feel like I’ve known you my whole life."),
+                ("Let's not.", "Jinu: Hey... I know this is sudden but, I feel like I’ve known you my whole life.")
+            ]},
+            {"type": "dialogue", "text": "Jinu: Why do I feel like I can tell you anything? Everything just flows."},
+            {"type": "choice", "options": [
+                ("I don’t know…. It just feels right.", "Jinu: When I gaze into your eyes, I feel myself being pulled in. It’s like staring into the expanding galaxies of the universe. Swirling and ever changing, in constant motion."),
+                ("That’s a little strange, because I literally don’t even know you...", "Jinu: Yeah, we’ve just met... but when I gaze into your eyes, I feel as if all my worries are being washed away. I’m drawn in as if you were the sun of my galaxy.")
+            ]},
+            {"type": "dialogue", "text": "Jinu begins to step towards you with light brimming behind his eyes. Suddenly, he pauses midstep, frowning slightly as he brings one hand up to his forehead."},
+            {"type": "dialogue", "text": "Jinu: I... His voice is gone. It’s really gone! All this time, and I didn’t even notice!"},
+            {"type": "choice", "options": [
+                ("Are you okay?", "Jinu: I’ve been suffocating silently, smothered by this burden."),
+                ("You’re hearing voices??", "Jinu: I’ve been suffocating silently, smothered by this burden.")
+            ]},
+            {"type": "dialogue", "text": "Jinu: But here, with you, I can finally breathe."},
+            {"type": "choice", "options": [
+                ("Whatever it is, I’m glad you feel better!", "Jinu: Am I really free?"),
+                ("What is this cryptic stuff???", "Jinu: Am I really free?")
+            ]},
+            {"type": "dialogue", "text": "Jinu: Is... meeting you my fate?"},
+            {"type": "dialogue", "text": "Just as he takes another step towards you, the phone in your pocket starts buzzing frantically. You leave Jinu on the patio and head back to your room, thoughts spiralling. Who will you choose? How could you choose between people you’ve just gotten to know?"},
         ]
     }
 ]
