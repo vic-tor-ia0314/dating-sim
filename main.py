@@ -35,16 +35,12 @@ bg_balcony = pygame.transform.scale(bg_balcony, (WIDTH, HEIGHT))
 bg_mall = pygame.image.load(r"mall.jpg").convert()
 bg_mall = pygame.transform.scale(bg_mall, (WIDTH, HEIGHT))
 
-bg_office = pygame.image.load(r"office.jpg").convert()
-bg_office = pygame.transform.scale(bg_office, (WIDTH, HEIGHT))
-
 backgrounds = {
     "title": bg_title,
     "home": bg_home,
     "cafe": bg_cafe,
     "balcony": bg_balcony,
     "mall": bg_mall,
-    "office": bg_office
 }
 
 # Create characters
@@ -55,18 +51,40 @@ def make_character(color):
 
 char_stilton = make_character((255, 180, 180))
 char_jinu = make_character((180, 255, 180))
-char_peppa = make_character((180, 180, 255))
+char_peppa = pygame.image.load("peppa.png").convert_alpha()
+char_peppa = pygame.transform.scale(char_peppa, (500, 600))
+char_leader = make_character((180, 180, 0))
 
 # ---------------------------
 # Dialogue Data (steps per scenario)
 # ---------------------------
 scenarios = [
     {
+        "name": "Initiation",
+        "background": "home",
+        "character": char_leader,
+        "steps": [
+            {"type": "dialogue", "text": "Leaders: We are gathered here today to celebrate the recruitment of another member under the watchful gaze of the Almighty One."},
+            {"type": "dialogue", "text": "Leaders: Although this marks the start of your journey, there remains a final challenge for your path. In order to achieve full ascension, you must perform two sacrificial rituals to Their Greatness."},
+            {"type": "choice", "options": [
+                ("What does that even mean?", "Leaders: As per tradition, the arrival of new members must be balanced by the removal of current members."),
+                ("Let’s freaking go.", "Leaders: As per tradition, the arrival of new members must be balanced by the removal of current members.")
+            ]},
+            {"type": "dialogue", "text": "Leaders: This should be relatively easy, as we have prepared a list of…. troublesome participants."},
+            {"type": "choice", "options": [
+                ("Wow, that is messed up...", "Leaders: You have twenty four hours until you must perform the sacrifices."),
+                ("Is this a dating sim?", "Leaders: You have twenty four hours until you must perform the sacrifices.")
+            ]},
+            {"type": "dialogue", "text": "Leaders: Choose wisely."}
+        ]
+    },
+    {
         "name": "At the Cafe",
         "background": "cafe",
         "character": char_stilton,
         "steps": [
-            {"type": "dialogue", "text": "Geronimo: *squeak* Hey, it's you! Oh you know this café? Did you know this café gets ceremonial grade matcha from Japan?"},
+            {"type": "dialogue", "text": "You exit your local cafe after ordering a drink. Someone from behind addresses you in surprise."},
+            {"type": "dialogue", "text": "Geronimo: *squeak* Hey, it's you, the new member! Oh you know this café? Did you know this café gets ceremonial grade matcha from Japan?"},
             {"type": "choice", "options": [
                 ("Err, matcha tastes like grass.", "Geronimo: Well, it's an acquired taste."),
                 ("I know! I love their matcha!", "Geronimo: Finally, someone gets it!")
