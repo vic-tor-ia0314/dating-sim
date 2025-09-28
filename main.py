@@ -23,16 +23,16 @@ font_dialogue_italic = pygame.font.SysFont("arial", 28, italic=True)
 bg_title = pygame.image.load(r"tree.jpg").convert()
 bg_title = pygame.transform.scale(bg_title, (WIDTH, HEIGHT))
 
-bg_home = pygame.image.load(r"home.jpg").convert()
+bg_home = pygame.image.load(r"home.jpeg").convert()
 bg_home = pygame.transform.scale(bg_home, (WIDTH, HEIGHT))
 
-bg_cafe = pygame.image.load(r"cafe.jpg").convert()
+bg_cafe = pygame.image.load(r"cafe.jpeg").convert()
 bg_cafe = pygame.transform.scale(bg_cafe, (WIDTH, HEIGHT))
 
-bg_balcony = pygame.image.load(r"balcony.jpg").convert()
+bg_balcony = pygame.image.load(r"balcony.jpeg").convert()
 bg_balcony = pygame.transform.scale(bg_balcony, (WIDTH, HEIGHT))
 
-bg_mall = pygame.image.load(r"mall.jpg").convert()
+bg_mall = pygame.image.load(r"mall.jpeg").convert()
 bg_mall = pygame.transform.scale(bg_mall, (WIDTH, HEIGHT))
 
 bg_void = pygame.image.load(r"void.jpg").convert()
@@ -54,10 +54,11 @@ def make_character(color):
     return surf
 
 char_stilton = make_character((255, 180, 180))
-char_jinu = make_character((180, 255, 180))
+char_jinu = pygame.image.load("jinu.png").convert_alpha()
+char_jinu = pygame.transform.scale(char_jinu, (450, 600))
 char_peppa = pygame.image.load("peppa.png").convert_alpha()
 char_peppa = pygame.transform.scale(char_peppa, (450, 600))
-char_leader = pygame.image.load("leader.jpg").convert_alpha()
+char_leader = pygame.image.load("leader.webp").convert_alpha()
 char_leader = pygame.transform.scale(char_leader, (500, 500))
 
 # ---------------------------
@@ -303,8 +304,8 @@ state = STATE_TITLE  # start at title screen
 # Dialogue and choice boxes
 dialogue_box = pygame.Rect(50, HEIGHT - 200, WIDTH - 100, 150)
 choice_boxes = [
-    pygame.Rect(150, HEIGHT - 80, 400, 50),
-    pygame.Rect(650, HEIGHT - 80, 400, 50)
+    pygame.Rect(150, HEIGHT - 80, 400, 70),
+    pygame.Rect(650, HEIGHT - 80, 400, 70)
 ]
 
 def draw_text_wrapped(text, font, color, rect, surface, line_spacing=5, padding=10):
@@ -343,7 +344,7 @@ def draw_title():
 def draw_scenario():
     # background and character
     screen.blit(backgrounds[current_scenario["background"]], (0, 0))
-    screen.blit(current_scenario["character"], (WIDTH//2 - 150, HEIGHT//2 - 250))
+    screen.blit(current_scenario["character"], (WIDTH//2 - 150, HEIGHT//2 - 325))
 
     # dialogue box
     pygame.draw.rect(screen, WHITE, dialogue_box)
