@@ -19,7 +19,7 @@ font_choice = pygame.font.SysFont("timesnewroman", 20)
 font_dialogue_italic = pygame.font.SysFont("timesnewroman", 28, italic=True)
 
 
-bg_title = pygame.image.load(r"tree.jpg").convert()
+bg_title = pygame.image.load(r"title.png").convert()
 bg_title = pygame.transform.scale(bg_title, (WIDTH, HEIGHT))
 
 bg_home = pygame.image.load(r"home.jpg").convert()
@@ -296,7 +296,7 @@ STATE_RESPONSE = "response"
 state = STATE_TITLE  # start at title screen
 
 #box styles
-dialogue_box = pygame.Rect(50, HEIGHT - 200, WIDTH - 100, 150)
+dialogue_box = pygame.Rect(50, HEIGHT - 160, WIDTH - 100, 150)
 choice_boxes = [
     pygame.Rect(150, HEIGHT - 80, 400, 70),
     pygame.Rect(650, HEIGHT - 80, 400, 70)
@@ -325,13 +325,13 @@ def draw_text_wrapped(text, font, color, rect, surface, line_spacing=5, padding=
 
 #draws
 def draw_title():
-    screen.blit(backgrounds["home"], (0, 0))
+    screen.blit(backgrounds["title"], (0, 0))
     title_surface = font_title.render(" ", True, WHITE)
     title_rect = title_surface.get_rect(center=(WIDTH//2, HEIGHT//3))
     screen.blit(title_surface, title_rect)
 
     subtitle = font_dialogue.render("Press SPACE to Start", True, WHITE)
-    sub_rect = subtitle.get_rect(center=(WIDTH//2, HEIGHT//2 + 50))
+    sub_rect = subtitle.get_rect(center=(610, 375))
     screen.blit(subtitle, sub_rect)
 
 def draw_scenario():
