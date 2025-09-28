@@ -35,12 +35,16 @@ bg_balcony = pygame.transform.scale(bg_balcony, (WIDTH, HEIGHT))
 bg_mall = pygame.image.load(r"mall.jpg").convert()
 bg_mall = pygame.transform.scale(bg_mall, (WIDTH, HEIGHT))
 
+bg_void = pygame.image.load(r"void.jpg").convert()
+bg_void = pygame.transform.scale(bg_void, (WIDTH, HEIGHT))
+
 backgrounds = {
     "title": bg_title,
     "home": bg_home,
     "cafe": bg_cafe,
     "balcony": bg_balcony,
     "mall": bg_mall,
+    "void": bg_void
 }
 
 # Create characters
@@ -112,8 +116,15 @@ scenarios = [
             {"type": "dialogue", "text": "Geronimo: Her latest album is ethereal, like- I can barely describe it with words… it's just so enlightening! *squeak* It really evokes the reoccurring themes of women’s struggles and men’s weaponized incompetency within relationships."},
             {"type": "choice", "options": [
                 ("I lover her music! It always has so much symbolism.", "Sometimes songs get so emotional that I tear up…. Man, music is one of mankind’s greatest achievements. It’s practically magic."),
-                ("It's not that deep… but her music’s great.", "Of course it is that deep! Can’t you see the hidden symbolism within her lyrics, the way they embellish the instrumentational choice?! It’s like magic.")
-            ]}
+                ("It's not that deep… but her music’s great.", "Of course it is that deep! Can’t you see the hidden symbolism within her lyrics, the way they embellish the instrumentational choice?! It’s practically magic-")
+            ]},
+            {"type": "dialogue", "text": "You get a message from your supervisor, asking you to head back to the building."},
+            {"type": "dialogue", "text": "Geronimo: Hey, we should totally read some of the new releases from the bookstore. I heard there were some female authors."},
+            {"type": "choice", "options": [
+                ("I'm so sorry, I have to go right now. But we can later!", "Geronimo: Wait-"),
+                ("Yeah, no. Bye.", "Geronimo: wait-")
+            ]},
+            {"type": "dialogue", "text": "- See you later!"},
         ]
     },
     {
@@ -144,7 +155,14 @@ scenarios = [
                 ("Uh, I literally don’t know you…. also, that’s way too expensive.", "Peppa: I thought we were on the same page! Ugh, way to make someone feel welcomed. Whatever, I always have my daddy’s card with me for cases like this. A girl’s gotta stay prepared! *oink oink*"),
                 ("I'd love to, bit mine's also maxxed out. Maybe another time or-", "Peppa: Oh, don’t you worry! I was joking, silly. For cases like these, I always have my daddy’s card with me. A girl’s gotta stay prepared!")
             ]},
-            {"type": "dialogue", "text": "You stare in astonishment as she takes out a gold coloured card and swipes. Sure enough, the transaction completes and the employee rushes to bag the garment.", "italic": True}
+            {"type": "dialogue", "text": "You stare in astonishment as she takes out a gold coloured card and swipes. Sure enough, the transaction completes and the employee rushes to bag the garment.", "italic": True},
+            {"type": "dialogue", "text": "Peppa: Alright, now I have the top, the heels, the skirt…. Maybe I need a matching skirt!"},
+            {"type": "choice", "options": [
+                ("Yes! Match the fit!", "Peppa: You get me! It’s an art, a lifestyle."),
+                ("You buy a lot of stuff.", "Peppa: It’s not just about the items, ugh! This lifestyle is a mindset, and I’m embracing it!")
+            ]},
+            {"type": "dialogue", "text": "Peppa: I’m heading out now! Tell me if you see any cute handbags at the next meeting!"},
+            {"type": "dialogue", "text": "Peppa trots away with her shopping bags, leaving you in the boutique."}
         ]
     },
     {
@@ -217,6 +235,52 @@ scenarios = [
             ]},
             {"type": "dialogue", "text": "Jinu: Is... meeting you my fate?"},
             {"type": "dialogue", "text": "Just as he takes another step towards you, the phone in your pocket starts buzzing frantically. You leave Jinu on the patio and head back to your room, thoughts spiralling. Who will you choose? How could you choose between people you’ve just gotten to know?"},
+            {"type": "dialogue", "text": "You close your bedroom door and press the recent missed calls button. You wince as the familiar, ominous drawl of the Leaders’ voices answer almost immediately. They tell you your time is up and you must make a decision."},
+        ]
+    },
+    {
+        "name": "Choice 1",
+        "background": "void",
+        "character": char_stilton,
+        "steps": [
+            {"type": "dialogue", "text": "All of a sudden, you find yourself in the cult’s chapel. A black, swirling void yawns in front of you, expanding over the most of the room. You realize that Geronimo, Peppa, and Jinu are being held by the Leaders in front of you, gazing at the void with terror as realization dawns upon them."},
+            {"type": "dialogue", "text": "Leaders: You must choose one and sacrifice the other two."},
+            {"type": "dialogue", "text": "Leaders: Choose wisely, now."},
+            {"type": "choice", "options": [
+                ("Save Geronimo Stilton", "Geronimo: Wow…. well, thanks for picking me. You must’ve been enlightened by my words. Would you like to check out the thrift store that recently opened near my street tomorrow? I’ll pick you up at 11:00."),
+                ("Sacrifice Geronimo Stilton", "Geronimo: But why? I followed all your orders! I did it page by page, line by line with every detail accounted for! ____, how could you?! What about that feminist literature we were gonna read together? Release me-wait-NOOOOOOO!")
+            ]}
+        ]
+    },
+    {
+        "name": "Choice 2",
+        "background": "void",
+        "character": char_peppa,
+        "steps": [
+            {"type": "choice", "options": [
+                ("Save Peppa Pig", "Peppa: I knew you liked me! My charms will work on anyone, heh! We should definitely check out my daddy’s yacht collection tomorrow!"),
+                ("Sacrifice Peppa Pig", "Peppa: No! What is the meaning of this?! Let go of me! Not the purse- not the purse! Please, c'mon, I can buy anything for you! Wait! GET YOUR HANDS OFF ME! ____, I WON'T FORGIVE YOU FOR THIS!")
+            ]}
+        ]
+    },
+    {
+        "name": "Choice 3",
+        "background": "void",
+        "character": char_jinu,
+        "steps": [
+            {"type": "choice", "options": [
+                ("Save Jinu", "Jinu: Well, this is a surprise…. not really. I knew we had a connection. You know, I had tickets to go to the aquarium further in town, would you like to join me tomorrow?"),
+                ("Sacrifice Jinu", "Jinu: It’s alright, I had a feeling I was one of the candidates. Maybe in another lifetime, in another universe, we could’ve worked. ___, I give my soul to you.")
+            ]}
+        ]
+    },
+    {
+        "name": "End",
+        "background": "home",
+        "character": char_leader,
+        "steps": [
+            {"type": "dialogue", "text": "Filled with a new sense of purpose, you are welcomed into the cult by the Leaders. Your ascension towards the Almighty One begins now."},
+            {"type": "dialogue", "text": "Congratulations! You’ve successfully completed the game. "}
         ]
     }
 ]
