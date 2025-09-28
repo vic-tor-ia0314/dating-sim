@@ -53,7 +53,8 @@ char_stilton = make_character((255, 180, 180))
 char_jinu = make_character((180, 255, 180))
 char_peppa = pygame.image.load("peppa.png").convert_alpha()
 char_peppa = pygame.transform.scale(char_peppa, (500, 600))
-char_leader = make_character((180, 180, 0))
+char_leader = pygame.image.load("leader.jpg").convert_alpha()
+char_leader = pygame.transform.scale(char_leader, (500, 500))
 
 # ---------------------------
 # Dialogue Data (steps per scenario)
@@ -207,7 +208,7 @@ def draw_text_wrapped(text, font, color, rect, surface, line_spacing=5, padding=
 # Drawing Functions
 # ---------------------------
 def draw_title():
-    screen.blit(backgrounds["title"], (0, 0))
+    screen.blit(backgrounds["home"], (0, 0))
     title_surface = font_title.render("Dating Sim", True, WHITE)
     title_rect = title_surface.get_rect(center=(WIDTH//2, HEIGHT//3))
     screen.blit(title_surface, title_rect)
